@@ -14,27 +14,26 @@ public class NaverApi {
 
         List<String> list = new ArrayList<>();
         String URL = "https://movie.naver.com/movie/sdb/rank/rmovie.naver";
-        Document doc;
+        Document doc= null;
 
         try {
             doc = Jsoup.connect(URL).get();
-            Elements movieList =doc.select(".tit3 > a");
-            for (Element e : movieList){
+            Elements movieList = doc.select(".tit3 > a");
+            int i = 0;
+            for (Element e : movieList) {
 //                System.out.println(e.attr("title"));
-                System.out.println(e.attr("href"));
-
-
-                String code = e.attr(("href"));
-                String[] codeArr = code.split("=");
+//                System.out.println(e.attr("href"));
+                String code = e.attr("href");
+                String [] codeArr = code.split("=");
+//                System.out.println("https://movie.naver.com/movie/bi/mi/photoViewPopup.naver?movieCode=" + codeArr[1]);
                 URL = "https://movie.naver.com/movie/bi/mi/photoViewPopup.naver?movieCode=" + codeArr[1];
                 doc = Jsoup.connect(URL).get();
-                movieList = doc.select("#targetImage");
-                list.add();
+                Elements img = doc.select("#targetImage");
 
-                System.out.println();
+                if (i >= 9) break;
+                list.add(img.attr("src"));
+                i++;
             }
-
-
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

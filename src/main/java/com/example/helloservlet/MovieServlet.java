@@ -16,9 +16,9 @@ public class MovieServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<String> movieList = NaverApi.movie();
-        for (String m: movieList) {
-            System.out.println(m);
-        }
+//        for (String m: movieList) {
+//            System.out.println(m);
+//        }
 
         Gson gson = new GsonBuilder().disableHtmlEscaping().create();
         String json = gson.toJson(movieList);
